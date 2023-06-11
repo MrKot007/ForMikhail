@@ -6,7 +6,13 @@ data class ModelAuth(
     val password: String
 )
 data class ModelReg(
-    val firstname: String
+    val firstname: String,
+    val lastname: String,
+    val patronymic: String,
+    val email: String,
+    val password: String,
+    val dateBirthDay: String,
+    val sex: String
 )
 data class ModelIdentity(
     val token: String,
