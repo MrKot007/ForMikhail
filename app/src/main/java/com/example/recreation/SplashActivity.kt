@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.widget.Toast
 import com.example.recreation.Connection.api
 
 class SplashActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class SplashActivity : AppCompatActivity() {
             api.signIn(ModelAuth(SharedPref.getEmail(this@SplashActivity)!!, SharedPref.getPassword(this@SplashActivity)!!))
                 .push(object: OnGetData<ModelIdentity>{
                     override fun onGet(data: ModelIdentity) {
+                        Toast.makeText(this@SplashActivity, "Вход по сохраненным данным", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                         finish()
                     }
