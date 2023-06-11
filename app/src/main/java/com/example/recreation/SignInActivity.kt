@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.example.recreation.Connection.api
 import com.example.recreation.databinding.ActivitySignInBinding
@@ -38,7 +39,7 @@ class SignInActivity : AppCompatActivity() {
                 }
 
                 override fun onError(error: String) {
-                    showAlert(error, this@SignInActivity)
+                    Log.e("ERRROR", error)
                 }
 
             }, this)
