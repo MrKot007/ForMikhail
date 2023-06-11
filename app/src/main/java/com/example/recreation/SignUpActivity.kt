@@ -41,9 +41,9 @@ class SignUpActivity : AppCompatActivity() {
                 binding.secondName.text.toString(),
                 binding.patronymic.text.toString(),
                 chosenSex,
-                binding.date.toString(),
-                binding.email.toString(),
-                binding.pass.toString()
+                binding.date.text.toString(),
+                binding.email.text.toString(),
+                binding.pass.text.toString()
             )
             request.forEach {
                 if (it == "") {
@@ -51,11 +51,11 @@ class SignUpActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
             }
-            if (binding.pass.text != binding.pssRepeat) {
+            if (binding.pass.text.toString() != binding.pssRepeat.text.toString()) {
                 showAlert("Пароли не совпадают!", this@SignUpActivity)
                 return@setOnClickListener
             }
-            api.signUp(ModelReg(request[0], request[1], request[2], request[5], request[6], request[4], request[3])).push(object: OnGetData<ModelIdentity>{
+            api.signUp(ModelReg(request[0], request[1], request[2], request[5], request[6], request[4], chosenSex)).push(object: OnGetData<ModelIdentity>{
                 override fun onGet(data: ModelIdentity) {
                     SharedPref.saveEmail(request[5], this@SignUpActivity)
                     SharedPref.savePassword(request[6], this@SignUpActivity)
