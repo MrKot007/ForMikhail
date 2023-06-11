@@ -1,7 +1,6 @@
 package com.example.chatapp
 
 import android.graphics.Color
-import android.view.inspector.IntFlagMapping
 
 data class ModelUser(
     val id: Int,
@@ -31,14 +30,32 @@ data class ModelUserMessage(
     val idUser: Int,
     val isYou: Boolean,
     val datetime: String,
-    val iaAudio: Boolean
-)
+    val isAudio: Boolean
+) {
+    fun toRenderMessage(user: ModelUser) : ModelRenderMessage {
+        return ModelRenderMessage(id, message, user, datetime, isYou, isAudio)
+    }
+}
+
 data class ModelArchivedMessage(
     val id: Int,
     val message: String,
     val datetime: String,
     val idUser: Int,
     val idChat: Int,
+    val isAudio: Boolean
+) {
+    fun toRenderMessage(user: ModelUser, isYou: Boolean) : ModelRenderMessage {
+        return ModelRenderMessage(id, message, user, datetime, isYou, isAudio)
+    }
+}
+
+data class ModelRenderMessage(
+    val id: Int,
+    val message: String,
+    val user: ModelUser,
+    val datetime: String,
+    val isYou: Boolean,
     val isAudio: Boolean
 )
 data class ModelChat(
@@ -49,4 +66,12 @@ data class ModelChat(
 data class ModelDataChat(
     val chat: ModelChat,
     val messages: List<ModelArchivedMessage>
-)
+) {
+    fun getUser(idUser: Int) : ModelUser {
+        if (idUser == chat.first.id) {
+            return chat.first
+        }else {
+            return chat.second
+        }
+    }
+}

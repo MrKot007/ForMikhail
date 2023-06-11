@@ -38,7 +38,14 @@ class ChatListActivity : AppCompatActivity(), Callback {
         runOnUiThread {
             binding.chatListRecyler.adapter = ChatListAdapter(chats, object: OnClickChat{
                 override fun onClick(chat: ModelChat) {
-
+                    val chatIntent = Intent(this@ChatListActivity, ChatActivity::class.java)
+                    if (chat.first.id == UserInfo.userId) {
+                        chatIntent.putExtra("title", chat.second.getFullName())
+                    }else {
+                        chatIntent.putExtra("title", chat.first.getFullName())
+                    }
+                    chatIntent.putExtra("chatId", chat.id)
+                    startActivity(chatIntent)
                 }
             })
             binding.chatListRecyler.layoutManager = LinearLayoutManager(this@ChatListActivity)
