@@ -10,7 +10,7 @@ import java.net.URI
 object Connection {
     const val url = "ws://strukov-artemii.online:8085"
     val callbacks: MutableList<Callback> = mutableListOf()
-    val client = object: WebSocketClient(URI("$url/chat"), mapOf("token" to UserInfo.token)) {
+    val client = object: WebSocketClient(URI("$url/chat"), mapOf("Authorization" to "Bearer ${UserInfo.token}")) {
         override fun onOpen(handshakedata: ServerHandshake?) {
             callbacks.forEach {
                 it.onOpen()
@@ -18,28 +18,28 @@ object Connection {
         }
 
         override fun onMessage(message: String) {
-            if ("\"type\": \"person\"" in message) {
+            if ("\"type\":\"person\"" in message) {
                 val modelUser = Gson().fromJson<ModelResponse<ModelUser>>(message, object:
                     TypeToken<ModelResponse<ModelUser>>(){}.type).body
                 callbacks.forEach {
                     it.onPerson(modelUser)
                 }
             }
-            if ("\"type\": \"message\"" in message) {
+            if ("\"type\":\"message\"" in message) {
                 val modelMessage = Gson().fromJson<ModelResponse<ModelUserMessage>>(message, object:
                     TypeToken<ModelResponse<ModelUserMessage>>(){}.type).body
                 callbacks.forEach {
                     it.onMessage(modelMessage)
                 }
             }
-            if ("\"type\": \"chats\"" in message) {
+            if ("\"type\":\"chats\"" in message) {
                 val chats = Gson().fromJson<ModelResponse<List<ModelChat>>>(message, object:
                     TypeToken<ModelResponse<List<ModelChat>>>(){}.type).body
                 callbacks.forEach {
                     it.onChats(chats)
                 }
             }
-            if ("\"type\": \"chat\"" in message) {
+            if ("\"type\":\"chat\"" in message) {
                 val modelDataChat = Gson().fromJson<ModelResponse<ModelDataChat>>(message, object:
                     TypeToken<ModelResponse<ModelDataChat>>(){}.type).body
                 callbacks.forEach {

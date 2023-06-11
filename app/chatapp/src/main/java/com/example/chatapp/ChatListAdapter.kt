@@ -18,9 +18,11 @@ class ChatListAdapter(val chats: List<ModelChat>, val onClickChat: OnClickChat) 
     override fun onBindViewHolder(holder: ChatItem, position: Int) {
         if (chats[position].first.id == UserInfo.userId) {
             holder.binding.background.setCardBackgroundColor(chats[position].second.getUserColor())
+            holder.binding.avatar.text = chats[position].second.lastname[0].toString()
             holder.binding.chatName.text = chats[position].second.getFullName()
         }else {
             holder.binding.background.setCardBackgroundColor(chats[position].first.getUserColor())
+            holder.binding.avatar.text = chats[position].first.lastname[0].toString()
             holder.binding.chatName.text = chats[position].first.getFullName()
         }
         holder.binding.base.setOnClickListener {
