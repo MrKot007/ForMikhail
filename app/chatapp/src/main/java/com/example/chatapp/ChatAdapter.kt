@@ -12,12 +12,14 @@ open class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
 class MyMessageViewHolder(private val binding: MyMessageBinding) : MessageViewHolder(binding.root) {
     override fun bind(renderMessage: ModelRenderMessage) {
+        binding.fbgc.setCardBackgroundColor(renderMessage.user.getUserColor())
         binding.date.text = renderMessage.datetime
         binding.msg.text = renderMessage.message
     }
 }
-class FriendMessageViewHodler(private val binding: FriendMessageBinding) : MessageViewHolder(binding.root) {
+class FriendMessageViewHolder(private val binding: FriendMessageBinding) : MessageViewHolder(binding.root) {
     override fun bind(renderMessage: ModelRenderMessage) {
+        binding.fbgc.setCardBackgroundColor(renderMessage.user.getUserColor())
         binding.date.text = renderMessage.datetime
         binding.msg.text = renderMessage.message
     }
@@ -27,7 +29,7 @@ class ChatAdapter(val messages: List<ModelRenderMessage>) : RecyclerView.Adapter
         if (viewType == 0) {
             return MyMessageViewHolder(MyMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }else {
-            return FriendMessageViewHodler(FriendMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            return FriendMessageViewHolder(FriendMessageBinding.inflate(LayoutInflater.from(parent.context), parent, false))
         }
     }
 
