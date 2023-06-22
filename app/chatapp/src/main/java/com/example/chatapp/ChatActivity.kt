@@ -48,8 +48,8 @@ class ChatActivity : AppCompatActivity(), Callback {
     override fun onChat(chat: ModelDataChat) {
         runOnUiThread {
             currentChat = chat
-            binding.avaChat.text = chat.getUser(chat.chat.first.id).lastname[0].toString()
-            binding.avaBackgroundChat.setCardBackgroundColor(chat.getUser(chat.chat.first.id).getUserColor())
+            binding.avaChat.text = chat.getUser(chat.chat.second.id).lastname[0].toString()
+            binding.avaBackgroundChat.setCardBackgroundColor(chat.getUser(chat.chat.second.id).getUserColor())
             messages = chat.messages.map { it.toRenderMessage(UserInfo.userId == it.idUser, chat.getUser(it.idUser) ) }
                 .toMutableList()
             binding.chat.adapter = ChatAdapter(messages.reversed())

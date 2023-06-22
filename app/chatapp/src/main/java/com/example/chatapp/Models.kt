@@ -39,14 +39,14 @@ data class ModelUserMessage(
 
 data class ModelArchivedMessage(
     val id: Int,
-    val message: String,
+    val text: String,
     val datetime: String,
     val idUser: Int,
     val idChat: Int,
     val isAudio: Boolean
 ) {
     fun toRenderMessage(isYou: Boolean, user: ModelUser) : ModelRenderMessage {
-        return ModelRenderMessage(id, message, user, datetime, isYou, isAudio)
+        return ModelRenderMessage(id, text, user, datetime, isYou, isAudio)
     }
 }
 data class SendMessage(
