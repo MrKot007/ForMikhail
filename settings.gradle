@@ -16,3 +16,4 @@ rootProject.name = "Recreation"
 include ':app'
 include ':app:chatapp'
 include ':app:workspace'
+include ':app:courses'
