@@ -7,7 +7,7 @@
     tools:context=".ChatListActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
@@ -57,7 +57,7 @@
         android:text="Задавайте любые вопросы нашим\n менторам через чат и получите ответ в\nтечении 12 часов ! "
         android:textColor="#353535"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatListRecyler"
