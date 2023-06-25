@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.courses.databinding.TagBinding
 
 class TagViewHolder(val binding: TagBinding) : RecyclerView.ViewHolder(binding.root)
-class TagsAdapter(val list: List<ModelTag>) : RecyclerView.Adapter<TagViewHolder>() {
+class TagsAdapter(val list: List<ModelTag>, val onClickTag: OnClickTag) : RecyclerView.Adapter<TagViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
         return TagViewHolder(TagBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
@@ -22,6 +22,9 @@ class TagsAdapter(val list: List<ModelTag>) : RecyclerView.Adapter<TagViewHolder
             holder.binding.back.setCardBackgroundColor(Color.rgb(255, 193, 0))
         }else {
             holder.binding.tagName.text = list[position].name
+            holder.binding.root.setOnClickListener {
+                onClickTag.onClick(list[position])
+            }
         }
     }
 
@@ -33,4 +36,7 @@ class TagsAdapter(val list: List<ModelTag>) : RecyclerView.Adapter<TagViewHolder
         }
     }
 
+}
+interface OnClickTag{
+    fun onClick(tag: ModelTag)
 }

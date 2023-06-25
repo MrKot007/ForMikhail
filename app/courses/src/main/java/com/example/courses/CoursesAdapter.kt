@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.courses.databinding.CourseBinding
 
 class CourseViewHolder(val binding: CourseBinding) : RecyclerView.ViewHolder(binding.root)
-class CoursesAdapter(val list: List<ModelCourse>, val tags: List<ModelTag>, val onClickCourse: OnClickCourse) : RecyclerView.Adapter<CourseViewHolder>() {
+class CoursesAdapter(var list: List<ModelCourse>, val tags: List<ModelTag>, val onClickCourse: OnClickCourse) : RecyclerView.Adapter<CourseViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
         return CourseViewHolder(CourseBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
@@ -24,6 +24,10 @@ class CoursesAdapter(val list: List<ModelCourse>, val tags: List<ModelTag>, val 
         holder.binding.cardView.setOnClickListener {
             onClickCourse.onClick(list[position])
         }
+    }
+    fun setData(data: List<ModelCourse>) {
+        list = data
+        notifyDataSetChanged()
     }
 
 }

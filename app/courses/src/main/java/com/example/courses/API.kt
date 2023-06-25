@@ -11,7 +11,7 @@ interface API {
     @GET("catalog/tags")
     fun getTags() : Call<List<ModelTag>>
     @GET("catalog/courses")
-    fun getCourses(@Header("Authorization") token: String) : Call<List<ModelCourse>>
+    fun getCourses(@Header("Authorization") token: String? = null) : Call<List<ModelCourse>>
     @GET("catalog/course")
     fun getCourse(@Query("idCourse") idCourse: Int): Call<CourseData>
     @POST("catalog/orderCreate")

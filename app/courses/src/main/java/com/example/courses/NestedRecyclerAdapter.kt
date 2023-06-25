@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.courses.databinding.SmallTagBinding
 
 class SmallTagViewHolder(val binding: SmallTagBinding) : RecyclerView.ViewHolder(binding.root)
-class NestedRecyclerAdapter(val tags: List<ModelTag>, val ids: List<Int>) : RecyclerView.Adapter<SmallTagViewHolder>(){
+class NestedRecyclerAdapter(val tags: List<ModelTag>, val ids: List<Int>, val selectedTags: List<Int>) : RecyclerView.Adapter<SmallTagViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SmallTagViewHolder {
         return SmallTagViewHolder(SmallTagBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }

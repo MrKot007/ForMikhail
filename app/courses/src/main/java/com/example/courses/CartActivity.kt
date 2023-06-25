@@ -11,13 +11,13 @@ import com.example.courses.databinding.ActivityCartBinding
 
 class CartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCartBinding
+    private var sum = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.cartRec.adapter = CartAdapter(cart)
         binding.cartRec.layoutManager = LinearLayoutManager(this@CartActivity)
-        var sum = 0
         for (i in cart) {
             sum+=i.price
         }
